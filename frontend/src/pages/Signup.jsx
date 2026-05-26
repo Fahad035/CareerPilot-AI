@@ -6,6 +6,7 @@ import { auth } from "../firebase/firebase";
 export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -89,12 +90,22 @@ export default function Signup() {
           <div>
             <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-green-400"
               placeholder="Create a strong password"
             />
+
+            <label className="mt-2 inline-flex items-center gap-2 text-sm text-gray-600 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={showPassword}
+                onChange={(e) => setShowPassword(e.target.checked)}
+                className="h-4 w-4 rounded border-gray-300"
+              />
+              Show password
+            </label>
 
             {/* Password strength meter */}
             <div className="mt-2">
